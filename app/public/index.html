@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>WebAPI練習</title>
+    <script src="js/search.js" defer></script>
+    <script src="js/users.js" defer></script>
+    <script src="js/index.js" defer></script>
+  </head>
+  <body>
+      <main>
+          <h1>ユーザー一覧</h1>
+        <label for="search">ユーザー名で検索</label>
+        <input type="text" id="search" />
+        <button id="search-btn">検索</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>ユーザー名</th>
+                    <th>チームID</th>
+                </tr>
+            </thead>
+            <tbody id="users-list"></tbody>
+        </table>
+      </main>
+  </body>
+</html>

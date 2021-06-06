@@ -3,6 +3,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2")
+const path = require("path")
 // const mysql = require("mysql");
 
 const app = express();
@@ -12,6 +13,8 @@ const connection = mysql.createConnection({
     user: "root",
     database: "test"
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 // const request = require("request")
 // app.use(bodyParser.urlencoded({extended: true}));
