@@ -1,0 +1,26 @@
+{
+  "name": "api-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node-dev app/app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ryo0210/API-practice.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ryo0210/API-practice/issues"
+  },
+  "homepage": "https://github.com/ryo0210/API-practice#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.2.5"
+  }
+}
