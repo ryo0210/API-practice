@@ -85,3 +85,9 @@ CREATE TABLE habits (
 );
 
 ```
+```
+INSERT INTO users (name) VALUES ("ryo");
+INSERT INTO users (name, team_id) VALUES ("yuta", 1);
+INSERT INTO users (name, team_id) VALUES ("kazuyuki", 1);
+
+```
