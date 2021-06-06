@@ -13,33 +13,71 @@
 
 ## テーブル設計(MySQL)
 
-users
+### users
 |フィールド名|データ型|NULL許容|その他|
 |:----|:----|:----|:----|
 |id|INT|NOT NULL|PRIMARY KEY|
-|team_id|INT| |FOREIGN KEY|
-|name|VARCHAR(30)|
+|team_id|INT|
+|name|VARCHAR(30)|NOT NULL|
 
-habit
+
+### teams
+|フィールド名|データ型|NULL許容|その他|
+|:----|:----|:----|:----|
+|id|INT|NOT NULL|PRIMARY KEY|
+|team_name|VARCHAR(30)|NOT NULL| |
+|team_overview|VARCHAR(300)| | |
+
+
+### membership
+|フィールド名|データ型|NULL許容|その他|
+|:----|:----|:----|:----|
+|id|INT|NOT NULL|PRIMARY KEY|
+|user_id|INT|NOT NULL|FOREIGN KEY|
+|team_id|INT|NOT NULL|FOREIGN KEY|
+
+
+### habits
 |フィールド名|データ型|NULL許容|その他|
 |:----|:----|:----|:----|
 |id|INT|NOT NULL|PRIMARY KEY|
 |user_id|INT|NOT NULL|FOREIGN KEY|
 |habit_title|VARCHAR(30)|NOT NULL| |
 |habit_memo|VARCHAR(300)| | |
-|habit_bigin_date|DATE|NOT NULL| |
-|habit_finish_date|DATE|NOT NULL| |
+|bigin_date|DATE|NOT NULL| |
+|finish_date|DATE|NOT NULL| |
 
-
+```
 CREATE TABLE users (
     id INT NOT NULL PRIMARY KEY,
     team_id INT,
     name VARCHAR(30) NOT NULL
 );
+```
 
+```
+CREATE TABLE teams (
+    id INT NOT NULL PRIMARY KEY,
+    team_name VARCHAR(30) NOT NULL,
+    team_overview VARCHAR(300)
+);
+```
+```
+CREATE TABLE membership (
+    id INT NOT NULL PRIMARY KEY,
+    user_id INT NOT NULL,
+    team_id INT NOT NULL,
+    FOREIGN KEY (user_id) references users(id),
+    FOREIGN KEY (team_id) references teams(id)
+);
+```
+```
 CREATE TABLE habits (
-    id INT NOT NULL PRINARY KRY,
-    user_id INT NOT NULL FORRIN KRY,
-    habit_title VARCHAR(30) 
-)
-
+    id INT NOT NULL PRIMARY KEY,
+    user_id INT NOT NULL,
+    habit_title VARCHAR(30) NOT NULL,
+    habnit_memo VARCHAR(300),
+    bigin_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    finish_date DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL 30 DAY)
+);
+```
