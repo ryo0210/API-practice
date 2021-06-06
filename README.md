@@ -18,19 +18,28 @@ users
 |:----|:----|:----|:----|
 |id|INT|NOT NULL|PRIMARY KEY|
 |team_id|INT| |FOREIGN KEY|
-|name|VARCHAR(20)|
+|name|VARCHAR(30)|
 
 habit
 |フィールド名|データ型|NULL許容|その他|
 |:----|:----|:----|:----|
 |id|INT|NOT NULL|PRIMARY KEY|
 |user_id|INT|NOT NULL|FOREIGN KEY|
-|habit_title|VARCHAR(20)|NOT NULL| |
+|habit_title|VARCHAR(30)|NOT NULL| |
 |habit_memo|VARCHAR(300)| | |
 |habit_bigin_date|DATE|NOT NULL| |
 |habit_finish_date|DATE|NOT NULL| |
 
 
+CREATE TABLE users (
+    id INT NOT NULL PRIMARY KEY,
+    team_id INT,
+    name VARCHAR(30) NOT NULL
+);
 
-
+CREATE TABLE habits (
+    id INT NOT NULL PRINARY KRY,
+    user_id INT NOT NULL FORRIN KRY,
+    habit_title VARCHAR(30) 
+)
 
