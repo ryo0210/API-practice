@@ -49,35 +49,39 @@
 
 ```
 CREATE TABLE users (
-    id INT NOT NULL PRIMARY KEY,
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     team_id INT,
     name VARCHAR(30) NOT NULL
 );
+
 ```
 
 ```
 CREATE TABLE teams (
-    id INT NOT NULL PRIMARY KEY,
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     team_name VARCHAR(30) NOT NULL,
     team_overview VARCHAR(300)
+
 );
 ```
 ```
 CREATE TABLE membership (
-    id INT NOT NULL PRIMARY KEY,
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     user_id INT NOT NULL,
     team_id INT NOT NULL,
     FOREIGN KEY (user_id) references users(id),
     FOREIGN KEY (team_id) references teams(id)
 );
+
 ```
 ```
 CREATE TABLE habits (
-    id INT NOT NULL PRIMARY KEY,
+    id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     user_id INT NOT NULL,
     habit_title VARCHAR(30) NOT NULL,
     habnit_memo VARCHAR(300),
     bigin_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     finish_date DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL 30 DAY)
 );
+
 ```
