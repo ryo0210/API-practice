@@ -47,7 +47,7 @@ app.get("/api/v1/users/:id", function(req, res) {
         if (!row) {
             res.status(404).send({message: "Not Found user!"})
         } else {
-            res.status(201).json(row)
+            res.status(200).json(row)
         }
     });
 });

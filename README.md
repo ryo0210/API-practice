@@ -61,8 +61,8 @@ CREATE TABLE teams (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     team_name VARCHAR(30) NOT NULL,
     team_overview VARCHAR(300)
-
 );
+
 ```
 ```
 CREATE TABLE membership (
@@ -79,7 +79,7 @@ CREATE TABLE habits (
     id INT AUTO_INCREMENT NOT NULL PRIMARY KEY,
     user_id INT NOT NULL,
     habit_title VARCHAR(30) NOT NULL,
-    habnit_memo VARCHAR(300),
+    habit_memo VARCHAR(300),
     bigin_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     finish_date DATETIME NOT NULL DEFAULT (CURRENT_TIMESTAMP + INTERVAL 30 DAY)
 );
@@ -91,3 +91,5 @@ INSERT INTO users (name, team_id) VALUES ("yuta", 1);
 INSERT INTO users (name, team_id) VALUES ("kazuyuki", 1);
 
 ```
+INSERT INTO habits (user_id, habit_title, habit_memo) VALUES (1, "Study", "EVERY DAY");
+ALTER TABLE habits CHANGE COLUMN habnit_memo habit_memo VARCHAR(300);
