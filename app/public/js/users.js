@@ -1,20 +1,23 @@
 //即時関数でモジュール化
-const usersModule = (() => {
-    const BASE_URL = "http://localhost:3000/api/v1/users"
+const searchModule = (() => {
+    const BASE_URL = "http://localhost:3000/api/v1/search"
 
     return {
-        fetchAllUsers: async () => {
-            const res = await fetch(BASE_URL)
-            const users = await res.json()
+        searchUsers: async () => {
+            //検索窓の値を取得
+            const query = document.getElementById("search").value
+            const res = await fetch(BASE_URL + "?q=" + query)
+            const result = await res.json()
+            let body = ""
 
-            for (let i=0; i<users.length; i++) {
-                const user = users[i]
-                const body = 
+            for (let i=0; i<result.length; i++) {
+                const user = result[i]
+                body += 
                     `<tr>
                         <td>${user.name}</td>
                         <td>${user.team_id}</td>
                     </tr>`
-                document.getElementById("users-list").insertAdjacentHTML("beforeend", body)
+                document.getElementById("users-list").innerHTML = body
             }
             
         }

@@ -93,3 +93,9 @@ INSERT INTO users (name, team_id) VALUES ("kazuyuki", 1);
 ```
 INSERT INTO habits (user_id, habit_title, habit_memo) VALUES (1, "Study", "EVERY DAY");
 ALTER TABLE habits CHANGE COLUMN habnit_memo habit_memo VARCHAR(300);
+
+|ステータスコード|メッセージ|説明|
+|:----|:----|:----|
+|400|必須項目が入力されていません。|必須項目に入力漏れがあるので、登録できない|
+|401|認証エラー|ユーザー認証ができていない|
+|500|サーバーエラー|サーバー側でエラーが発生している|

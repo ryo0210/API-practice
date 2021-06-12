@@ -3,9 +3,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2")
-const path = require("path")
-// const mysql = require("mysql");
-
+const path = require("path");
+const { query } = require("express");
 const app = express();
 
 const connection = mysql.createConnection({
@@ -14,13 +13,16 @@ const connection = mysql.createConnection({
     database: "test"
 });
 
+// リクエストのbodyをパースする設定
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json())
+
+// publicディレクトリを格納ファイル群のルートディレクトリとして設定
 app.use(express.static(path.join(__dirname, 'public')));
 
-// const request = require("request")
-// app.use(bodyParser.urlencoded({extended: true}));
 
 //Get all users
-app.all("/api/v1/users", function(req, res) {
+app.all("/api/v1/users_list", function(req, res) {
     //Connect mysql2
     connection.connect(function(err) {
         if (err) throw err;
@@ -37,7 +39,7 @@ app.all("/api/v1/users", function(req, res) {
 
 //Get a user
 app.get("/api/v1/users/:id", function(req, res) {
-    //Connect mysql2
+    //Connect mysql
     connection.connect(function(err) {
         if (err) throw err;
         console.log("Connected get method!!!");
@@ -54,7 +56,6 @@ app.get("/api/v1/users/:id", function(req, res) {
 
 //Search users matching keyword
 app.get("/api/v1/search", function(req, res) {
-    //Connect mysql2
     connection.connect(function(err) {
         if (err) throw err;
         console.log("Connected get method!!!");
@@ -68,6 +69,34 @@ app.get("/api/v1/search", function(req, res) {
         }
     });
 });
+
+// Create a new user
+app.post("/api/v1/users", async function(req, res) {
+    connection.connect(function(err) {
+        if (err) throw err;
+        console.log("Connected POST method!!!");
+    });
+
+    const user_id = req.body.user_id
+    const user_name = req.body.user_name ? req.body.user_name : ""
+    const user_icon = req.body.user_icon ? req.body.user_icon : ""
+    
+    const query = async (sql) => {
+        return new Promise((resolve, reject) => {
+            connection.query(sql, (err) => {
+                if (err) {
+                    res.status(500).send(err)
+                    return reject()
+                } else {
+                    res.json({message: "新規ユーザーの登録に成功しました。"})
+                    return resolve()
+                }
+            })
+        })
+    }
+    await query(`INSERT INTO users (name) VALUES ("${user_name}")`)
+})
+
 
 app.listen(3000, function(req, res) {
   console.log("server is running on part 3000.");
