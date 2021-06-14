@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2")
 const path = require("path");
-const { query } = require("express");
+// const { query } = require("express");
 const app = express();
 const mysqlpass = require("/Users/ryo/Development/API-practice/mysql.js")
 const pass = new mysqlpass
@@ -178,6 +178,33 @@ app.delete("/api/v1/users/:user_id", async function(req, res) {
     })
 });
 
+app.post("/api/v1/habit", async function(req, res) {
+    if (!req.body.user_id || req.body.user_id === "") {
+        res.json({"code": 101, "description": "ユーザー名が指定されていません。"})
+    } else if (!req.body.habit_title || req.body.habit_title === "") {
+        res.json({"code": 101, "description": "習慣化のタイトルが指定されていません。"})
+    } else {
+        console.log("else-------");
+        connection.connect(function(err) {
+            if (err) throw err;
+            console.log("Connected MySQL!!!");
+        });
+
+        const user_id = req.body.user_id
+        const habit_title = req.body.habit_title
+        const habit_memo = req.body.habit_memo
+        console.log(habit_title);
+        try {
+            await que(
+                `INSERT INTO habits (user_id, habit_title, habit_memo) VALUES ("${user_id}", "${habit_title}", "${habit_memo}")`,
+                connection
+            )
+            res.status(201).send()
+        } catch (e) {
+            res.status(500).send({"error": e})
+        };
+    };
+});
 
 app.listen(3000, function(req, res) {
   console.log("server is running on part 3000.");
