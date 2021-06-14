@@ -1,17 +1,24 @@
 //jshint esversion:6
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2")
 const path = require("path");
 const { query } = require("express");
 const app = express();
+const mysqlpass = require("/Users/ryo/Development/API-practice/mysql.js")
+const pass = new mysqlpass
+
 
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     database: "test"
 });
+// const connection = mysql.createConnection({
+//     host: pass.host,
+//     user: pass.user,
+//     database: pass.database
+// });
 
 // リクエストのbodyをパースする設定
 app.use(bodyParser.urlencoded({extended: true}));
@@ -174,4 +181,5 @@ app.delete("/api/v1/users/:user_id", async function(req, res) {
 
 app.listen(3000, function(req, res) {
   console.log("server is running on part 3000.");
+  console.log(pass.pass.database);
 });
