@@ -3,11 +3,17 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const mysql = require("mysql2")
 const path = require("path");
-// const { query } = require("express");
 const app = express();
 const mysqlpass = require("/Users/ryo/Development/API-practice/mysql.js")
 const pass = new mysqlpass
+// const PORT = process.env.PORT || 5000
 
+// app
+//   .use(express.static(path.join(__dirname, 'public')))
+//   .set('views', path.join(__dirname, 'views'))
+//   .set('view engine', 'ejs')
+//   .get('/', (req, res) => res.render('pages/index'))
+//   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 const connection = mysql.createConnection({
     host: "localhost",
@@ -206,7 +212,11 @@ app.post("/api/v1/habit", async function(req, res) {
     };
 });
 
-app.listen(3000, function(req, res) {
-  console.log("server is running on part 3000.");
-  console.log(pass.pass.database);
+// app.set('port', (process.env.PORT || 3000));
+// app.listen(3000, function(req, res) {
+//   console.log("server is running on part 3000.");
+// });
+const port = process.env.PORT || 5000;
+app.listen(port, function(req, res) {
+    console.log("server is running on part" + port + "!!!");
 });
