@@ -4,8 +4,6 @@ const bodyParser = require("body-parser");
 const mysql = require("mysql2")
 const path = require("path");
 const app = express();
-const mysqlpass = require("/Users/ryo/Development/API-practice/mysql.js")
-const pass = new mysqlpass
 
 const connection = mysql.createConnection({
     host: "localhost",
