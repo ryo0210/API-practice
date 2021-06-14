@@ -6,25 +6,12 @@ const path = require("path");
 const app = express();
 const mysqlpass = require("/Users/ryo/Development/API-practice/mysql.js")
 const pass = new mysqlpass
-// const PORT = process.env.PORT || 5000
-
-// app
-//   .use(express.static(path.join(__dirname, 'public')))
-//   .set('views', path.join(__dirname, 'views'))
-//   .set('view engine', 'ejs')
-//   .get('/', (req, res) => res.render('pages/index'))
-//   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
 const connection = mysql.createConnection({
     host: "localhost",
     user: "root",
     database: "test"
 });
-// const connection = mysql.createConnection({
-//     host: pass.host,
-//     user: pass.user,
-//     database: pass.database
-// });
 
 // リクエストのbodyをパースする設定
 app.use(bodyParser.urlencoded({extended: true}));
